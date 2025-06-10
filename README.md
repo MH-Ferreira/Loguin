@@ -235,6 +235,6 @@ dependencies
 
 ## ✒️ Autores
 
-* **Matheus ferreira** - *Desenvolvimento* - [SeuUsuario](https://github.com/MH-Ferreira)
+* **Matheus ferreira** - *Desenvolvedor* - [Meu perfil](https://github.com/MH-Ferreira)
 
 
