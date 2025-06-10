@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --error-color: #ef4444;
+      --surface-color: #ffffff;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f4f6;
+      padding: 1rem;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface-color);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-header h1 {
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background-color: #fee2e2;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .submit-button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .signup-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <div class="login-header">
+    <h1>Bem-vindo</h1>
+    <p>Entre com sua conta para continuar</p>
+  </div>
+
+  <form action="/logar" method="post">
+    <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required
+             placeholder="Seu email">
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" required
+             placeholder="Sua senha">
+    </div>
+
+    <button type="submit" class="submit-button">Entrar</button>
+
+    <div class="signup-link">
+      Não tem uma conta? <a href="/cadastroUsuario">Cadastre-se</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
