@@ -8,18 +8,18 @@ Sistema de autenticação desenvolvido com Spring Boot que implementa um fluxo c
 ### 📂 Estrutura de Pacotes
 ```
 src/
-<p></p>├── main/ 
-<p></p>├── java/ 
-<p></p>│ └── br.applogin.login/ 
-<p></p>├── controller/ 
-<p></p>├── model/ 
-<p></p>├── repository/ 
-<p></p>├── service/ 
-<p></p>└── LoginApplication.java 
-<p></p>└── resources/ 
-<p></p>├── templates/ 
-<p></p>├── static/ 
-<p></p>└── application.properties
+├── main/ 
+├── java/ 
+│ └── br.applogin.login/ 
+├── controller/ 
+├── model/ 
+├── repository/ 
+├── service/ 
+└── LoginApplication.java 
+└── resources/ 
+├── templates/ 
+├── static/ 
+└── application.properties
 ``` 
 
 ### 📁 Detalhamento das Pastas
@@ -122,7 +122,7 @@ spring.thymeleaf.cache=false
 
 1. **Clone o Repositório**
 ```
-bash git clone [https://seu-repositorio.git](https://seu-repositorio.git) cd nome-do-projeto
+bash git clone [https://seu-repositorio.git](https://github.com/MH-Ferreira/Loguin.git) cd nome-do-projeto
 ``` 
 
 2. **Configure o Banco de Dados**
@@ -224,27 +224,6 @@ dependencies
 - Fluxo de cadastro
 - Fluxo de login
 - Persistência de dados
-
-## 📈 Melhorias Futuras
-
-1. **Segurança**
-   - Implementar Spring Security
-   - Adicionar autenticação 2FA
-   - Criptografia de senha mais robusta
-
-2. **Funcionalidades**
-   - Recuperação de senha
-   - Perfil de usuário
-   - Upload de avatar
-
-3. **Interface**
-   - Tema escuro
-   - Animações
-   - Mais feedback visual
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 👥 Contribuição
 
