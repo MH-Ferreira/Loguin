@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cadastro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --primary-hover: #2563eb;
+      --error-color: #ef4444;
+      --surface-color: #1f2937;
+      --background-color: #111827;
+      --input-background: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --input-border: #4b5563;
+      --input-focus: #60a5fa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background-color);
+      padding: 1rem;
+      color: var(--text-primary);
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface-color);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg,
+      var(--primary-color),
+      #4f46e5,
+      var(--primary-hover));
+      border-radius: 1.1rem;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-header h1 {
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: var(--input-background);
+      border: 1px solid var(--input-border);
+      color: var(--text-primary);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      background-color: rgba(55, 65, 81, 0.9);
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background-color: rgba(239, 68, 68, 0.1);
+      border-radius: 0.5rem;
+      text-align: center;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-button:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .submit-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+              45deg,
+              transparent,
+              rgba(255, 255, 255, 0.1),
+              transparent
+      );
+      transform: rotate(45deg);
+      animation: buttonGlow 2s linear infinite;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--primary-color);
+      transform: translateX(-3px);
+    }
+
+    .back-link svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .back-link:hover svg {
+      transform: translateX(-2px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes buttonGlow {
+      from {
+        transform: rotate(45deg) translateX(-100%);
+      }
+      to {
+        transform: rotate(45deg) translateX(100%);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 1.5rem;
+      }
+
+      .login-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <a href="/login" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+    </svg>
+    Voltar para login
+  </a>
+
+  <div class="login-header">
+    <h1>Criar conta</h1>
+    <p>Preencha seus dados para começar</p>
+  </div>
+
+  <form action="/cadastroUsuario" method="post" th:action="@{/cadastroUsuario}">
+    <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+
+    <div class="form-group">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" required
+             placeholder="Seu nome">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required
+             placeholder="Seu melhor email">
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" required
+             placeholder="Escolha uma senha segura">
+    </div>
+
+    <button type="submit" class="submit-button">Criar conta</button>
+  </form>
+</div>
+</body>
+</html>

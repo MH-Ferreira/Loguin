@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --primary-hover: #2563eb;
+      --success-color: #10b981;
+      --surface-color: #1f2937;
+      --background-color: #111827;
+      --card-background: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --danger-color: #ef4444;
+      --danger-hover: #dc2626;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background-color);
+      padding: 1rem;
+      color: var(--text-primary);
+    }
+
+    .dashboard-container {
+      width: 100%;
+      max-width: 500px;
+      background: var(--surface-color);
+      padding: 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background-color: var(--success-color);
+      color: var(--background-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+      animation: scaleIn 0.5s ease-out;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .welcome-message {
+      color: var(--success-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      animation: slideIn 0.5s ease-out;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      animation: slideIn 0.5s ease-out 0.2s both;
+    }
+
+    .user-name {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+      animation: slideIn 0.5s ease-out 0.4s both;
+    }
+
+    .stat-card {
+      background: var(--card-background);
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-card h3 {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .logout-button {
+      background-color: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      animation: slideIn 0.5s ease-out 0.6s both;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
+    }
+
+    .logout-button:hover {
+      background-color: var(--danger-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    /* Efeito de brilho nos cards */
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 0.75rem;
+      background: linear-gradient(
+              45deg,
+              transparent,
+              rgba(255, 255, 255, 0.05),
+              transparent
+      );
+      z-index: 1;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Efeito de brilho no hover dos elementos */
+    .dashboard-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg,
+      var(--primary-color),
+      var(--success-color));
+      border-radius: 1.1rem;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    /* Responsividade */
+    @media (max-width: 480px) {
+      .dashboard-container {
+        padding: 1.5rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="success-icon">✓</div>
+  <div class="welcome-message">
+    Parabéns! Login realizado com sucesso!
+  </div>
+  <h2>Bem-vindo(a),
+    <span class="user-name" th:text="${nomeUsuario != null ? nomeUsuario : 'Visitante'}">
+                Usuário
+            </span>!
+  </h2>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3>Último acesso</h3>
+      <p th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}">01/01/2024</p>
+    </div>
+    <div class="stat-card">
+      <h3>Status</h3>
+      <p>Ativo</p>
+    </div>
+  </div>
+
+  <form action="/sair" method="post" th:action="@{/sair}">
+    <button type="submit" class="logout-button">Sair</button>
+  </form>
+</div>
+
+<script>
+  window.onload = function() {
+    console.log("Dashboard carregada");
+    const userName = document.querySelector('.user-name');
+    if (userName) {
+      console.log("Nome do usuário na página:", userName.textContent);
+    }
+  }
+</script>
+</body>
+</html>
